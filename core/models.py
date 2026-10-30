@@ -5,7 +5,7 @@ class Evento(models. Model):
     titulo = models.CharField(max_length=100)
     descricao = models.TextField(blank = True, null= True)
     data_evento = models.DateTimeField(verbose_name= 'Data do Evento')
-    data_criacao = models.DateTimeField(auto_now= True)
+    data_criacao = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(User, on_delete = models.CASCADE)
     
 
@@ -17,6 +17,6 @@ class Evento(models. Model):
         return self.titulo
 
     def get_data_criacao(self):
-        return self.data_evento.strftime('%d/%m/%Y  %H: %M Hrs')
+        return self.data_criacao.strftime('%d/%m/%Y %H:%M')
 
 
