@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Evento(models. Model):
     titulo = models.CharField(max_length=100)
@@ -19,4 +20,7 @@ class Evento(models. Model):
     def get_data_criacao(self):
         return self.data_criacao.strftime('%d/%m/%Y %H:%M')
 
+    def get_data_input_evento(self):
+        data_evento_local = timezone.localtime(self.data_evento)
+        return data_evento_local.strftime('%Y-%m-%dT%H:%M')
 

@@ -3,12 +3,17 @@
 
 
 <h2>Agendamentos</h2>
-<a href="{% url 'evento' %}">
-  <button type="button">Novo Evento</button>
-</a>
+<a href="{% url 'evento' %}">Novo evento</a>
 <ul style="font-size: 18px">
   {% for evento in eventos %}
-  <li>{{ evento.titulo }} - {{ evento.data_evento|date:"d/m/Y H:i" }}</li>
+  <li>
+    {{ evento.titulo }} - {{ evento.data_evento|date:"d/m/Y H:i" }}
+    (<a href="{% url 'evento' %}?id={{ evento.id }}">Editar</a>
+    / <form action="{% url 'delete_evento' evento.id %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit">Excluir</button>
+    </form>)
+  </li>
   {% endfor %}
 </ul>
 {% endblock %}
